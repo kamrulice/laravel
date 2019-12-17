@@ -1,6 +1,8 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 @section('content')
+    <hr>
     <div class="container">
+        <div class="site section">
        <div class="col-md-8">
            <form action="{{route('/save/view')}}" method="post" enctype="multipart/form-data">
                {{ csrf_field() }}
@@ -27,5 +29,5 @@
            </form>
        </div>
     </div>
-
+    </div>
 @endsection

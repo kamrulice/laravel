@@ -72,6 +72,9 @@ Route::get('/group-test/{id}', function(Request $request, $id){
 Route::get('/create/view/','HomeController@create');
 Route::post('/save/view','HomeController@store')->name('/save/view');
 Route::get('/search','HomeController@search')->name('/search');
+Route::get('/hash','HomeController@hash');
+Route::post('/save/hash','HomeController@stores')->name('/save/hash');
+Route::post('/check','HomeController@check')->name('/check');
 Auth::routes();
 Route::post('stripe/webhook', '\Bulkly\Http\Controllers\WebhookController@handleWebhook');
 Route::get('/', 'HomeController@index')->name('home');

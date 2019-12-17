@@ -1,11 +1,11 @@
 <?php
 
 namespace Bulkly\Http\Controllers;
-
+use Bulkly\Encrypt;
 use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use Bulkly\User;
@@ -43,6 +43,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function hash(){
+        return view('admin.layouts.encrypt');
+    }
+
+    public function stores(Request $request){
+        $this->validate($request,[
+            'string'=>'required',
+        ]);
+        Encrypt::create([
+            'string'=> Hash::make(request('string')),
+        ]);
+        $result = Encrypt::all()->first();
+        return redirect()->back()->with('message',$result);
+    }
+
+    public function check(Request $request){
+        $result  = Encrypt::where('string',$request->check)->get();
+        if($result) {
+            return redirect()->back()->with('message', 'success');
+        }
+    else{
+        return redirect()->back()->with('message','failed');
+    }
+    }
 
     public function create(){
         return view('admin.layouts.createView');
